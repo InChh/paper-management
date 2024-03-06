@@ -17,35 +17,16 @@ declare module "@elegant-router/types" {
   export type RouteMap = {
     "root": "/";
     "not-found": "/:pathMatch(.*)*";
-    "exception": "/exception";
-    "exception_403": "/exception/403";
-    "exception_404": "/exception/404";
-    "exception_500": "/exception/500";
     "403": "/403";
     "404": "/404";
     "500": "/500";
     "about": "/about";
-    "function": "/function";
-    "function_hide-child": "/function/hide-child";
-    "function_hide-child_one": "/function/hide-child/one";
-    "function_hide-child_three": "/function/hide-child/three";
-    "function_hide-child_two": "/function/hide-child/two";
-    "function_multi-tab": "/function/multi-tab";
-    "function_tab": "/function/tab";
     "home": "/home";
     "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
-    "manage": "/manage";
-    "manage_menu": "/manage/menu";
-    "manage_role": "/manage/role";
-    "manage_user": "/manage/user";
-    "manage_user-detail": "/manage/user-detail/:id";
-    "multi-menu": "/multi-menu";
-    "multi-menu_first": "/multi-menu/first";
-    "multi-menu_first_child": "/multi-menu/first/child";
-    "multi-menu_second": "/multi-menu/second";
-    "multi-menu_second_child": "/multi-menu/second/child";
-    "multi-menu_second_child_home": "/multi-menu/second/child/home";
-    "user-center": "/user-center";
+    "paper": "/paper";
+    "paper_list": "/paper/list";
+    "worker": "/worker";
+    "worker_list": "/worker/list";
   };
 
   /**
@@ -65,10 +46,6 @@ declare module "@elegant-router/types" {
     RouteKey,
     | "root"
     | "not-found"
-    | "exception"
-    | "exception_403"
-    | "exception_404"
-    | "exception_500"
   >;
 
   /**
@@ -85,12 +62,10 @@ declare module "@elegant-router/types" {
     | "404"
     | "500"
     | "about"
-    | "function"
     | "home"
     | "login"
-    | "manage"
-    | "multi-menu"
-    | "user-center"
+    | "paper"
+    | "worker"
   >;
 
   /**
@@ -100,7 +75,6 @@ declare module "@elegant-router/types" {
     CustomRouteKey,
     | "root"
     | "not-found"
-    | "exception"
   >;
 
   /**
@@ -113,19 +87,9 @@ declare module "@elegant-router/types" {
     | "500"
     | "login"
     | "about"
-    | "function_hide-child_one"
-    | "function_hide-child_three"
-    | "function_hide-child_two"
-    | "function_multi-tab"
-    | "function_tab"
     | "home"
-    | "manage_menu"
-    | "manage_role"
-    | "manage_user-detail"
-    | "manage_user"
-    | "multi-menu_first_child"
-    | "multi-menu_second_child_home"
-    | "user-center"
+    | "paper_list"
+    | "worker_list"
   >;
 
   /**
@@ -135,9 +99,6 @@ declare module "@elegant-router/types" {
     CustomRouteKey,
     | "root"
     | "not-found"
-    | "exception_403"
-    | "exception_404"
-    | "exception_500"
   >;
 
   /**

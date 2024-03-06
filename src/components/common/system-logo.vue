@@ -3,7 +3,8 @@ defineOptions({ name: 'SystemLogo' });
 </script>
 
 <template>
-  <IconLocalLogo />
+  <!--  <IconLocalLogo />-->
+  <SvgIcon local-icon="wf" />
 </template>
 
 <style scoped></style>
