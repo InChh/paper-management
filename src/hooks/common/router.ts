@@ -1,6 +1,8 @@
 import { useRouter } from 'vue-router';
 import type { RouteLocationRaw } from 'vue-router';
 import type { RouteKey } from '@elegant-router/types';
+import { inject } from 'vue';
+import type Keycloak from 'keycloak-js';
 import { router as globalRouter } from '@/router';
 
 /**
@@ -48,47 +50,12 @@ export function useRouterPush(inSetup = true) {
   /**
    * Navigate to login page
    *
-   * @param loginModule The login module
+   * @param _loginModule The login module
    * @param redirectUrl The redirect url, if not specified, it will be the current route fullPath
    */
-  async function toLogin(loginModule?: UnionKey.LoginModule, redirectUrl?: string) {
-    const module = loginModule || 'pwd-login';
-
-    const options: RouterPushOptions = {
-      params: {
-        module
-      }
-    };
-
-    const redirect = redirectUrl || route.value.fullPath;
-
-    options.query = {
-      redirect
-    };
-
-    return routerPushByKey('login', options);
-  }
-
-  /**
-   * Toggle login module
-   *
-   * @param module
-   */
-  async function toggleLoginModule(module: UnionKey.LoginModule) {
-    const query = route.value.query as Record<string, string>;
-
-    return routerPushByKey('login', { query, params: { module } });
-  }
-
-  /** Redirect from login */
-  async function redirectFromLogin() {
-    const redirect = route.value.query?.redirect as string;
-
-    if (redirect) {
-      routerPush(redirect);
-    } else {
-      toHome();
-    }
+  async function toLogin(_loginModule?: UnionKey.LoginModule, redirectUrl?: string) {
+    const keycloak = inject('$keycloak') as Keycloak;
+    await keycloak.login({ redirectUri: redirectUrl || route.value.fullPath });
   }
 
   return {
@@ -97,7 +64,6 @@ export function useRouterPush(inSetup = true) {
     routerBack,
     routerPushByKey,
     toLogin,
-    toggleLoginModule,
-    redirectFromLogin
+    toHome
   };
 }

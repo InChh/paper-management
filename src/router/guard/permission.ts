@@ -2,7 +2,6 @@ import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-r
 import type { RouteKey, RoutePath } from '@elegant-router/types';
 import { useAuthStore } from '@/store/modules/auth';
 import { useRouteStore } from '@/store/modules/route';
-import { localStg } from '@/utils/storage';
 
 export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
@@ -13,23 +12,26 @@ export function createPermissionGuard(router: Router) {
     // 1. route with href
     if (to.meta.href) {
       window.open(to.meta.href, '_blank');
-      next({ path: from.fullPath, replace: true, query: from.query, hash: to.hash });
+      next({
+        path: from.fullPath,
+        replace: true,
+        query: from.query,
+        hash: to.hash
+      });
     }
 
     const authStore = useAuthStore();
 
-    const isLogin = Boolean(localStg.get('token'));
+    const isLogin = Boolean(authStore.token);
     const needLogin = !to.meta.constant;
     const routeRoles = to.meta.roles || [];
-    const rootRoute: RouteKey = 'root';
-    const loginRoute: RouteKey = 'login';
     const noPermissionRoute: RouteKey = '403';
 
     // check whether the user has permission to access the route
     // 1. if the route's "roles" is empty, then it is allowed to access
     // 2. if the user is super admin, then it is allowed to access
     // 3. if the user's role is included in the route's "roles", then it is allowed to access
-    const SUPER_ADMIN = 'R_SUPER';
+    const SUPER_ADMIN = 'admin';
     const hasPermission =
       !routeRoles.length ||
       authStore.userInfo.roles.includes(SUPER_ADMIN) ||
@@ -37,12 +39,12 @@ export function createPermissionGuard(router: Router) {
 
     const strategicPatterns: CommonType.StrategicPattern[] = [
       // 1. if it is login route when logged in, change to the root page
-      {
-        condition: isLogin && to.name === loginRoute,
-        callback: () => {
-          next({ name: rootRoute });
-        }
-      },
+      // {
+      //   condition: isLogin,
+      //   callback: () => {
+      //     next({ name: rootRoute });
+      //   }
+      // },
       // 2. if is is constant route, then it is allowed to access directly
       {
         condition: !needLogin,
@@ -51,12 +53,12 @@ export function createPermissionGuard(router: Router) {
         }
       },
       // 3. if the route need login but the user is not logged in, then switch to the login page
-      {
-        condition: !isLogin && needLogin,
-        callback: () => {
-          next({ name: loginRoute, query: { redirect: to.fullPath } });
-        }
-      },
+      // {
+      //   condition: !isLogin && needLogin,
+      //   callback: () => {
+      //     keycloak.login({ redirectUri: window.location.href });
+      //   }
+      // },
       // 4. if the user is logged in and has permission, then it is allowed to access
       {
         condition: isLogin && needLogin && hasPermission,
@@ -118,15 +120,11 @@ async function createAuthRouteGuard(
   }
 
   // 4. If the user is not logged in, then redirect to the login page.
-  const isLogin = Boolean(localStg.get('token'));
-  if (!isLogin) {
-    const loginRoute: RouteKey = 'login';
-    const redirect = to.fullPath;
-
-    next({ name: loginRoute, query: { redirect } });
-
-    return false;
-  }
+  // const isLogin = getToken();
+  // if (!isLogin) {
+  //   await keycloak.login({ redirectUri: window.location.href });
+  //   return false;
+  // }
 
   // 5. init auth route
   await routeStore.initAuthRoute();

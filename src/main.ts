@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import './plugins/assets';
-import { setupDayjs, setupIconifyOffline, setupLoading, setupNProgress } from './plugins';
+import { setupDayjs, setupIconifyOffline, setupKeycloak, setupLoading, setupNProgress } from './plugins';
 import { setupStore } from './store';
 import { setupRouter } from './router';
 import { setupI18n } from './locales';
@@ -17,13 +17,14 @@ async function setupApp() {
 
   const app = createApp(App);
 
-  setupStore(app);
+  setupKeycloak(app, async () => {
+    setupStore(app);
 
-  await setupRouter(app);
+    await setupRouter(app);
 
-  setupI18n(app);
-
-  app.mount('#app');
+    setupI18n(app);
+    app.mount('#app');
+  });
 }
 
 setupApp();

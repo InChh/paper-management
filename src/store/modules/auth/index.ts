@@ -1,18 +1,19 @@
-import { computed, reactive, ref } from 'vue';
+import { computed, inject, reactive, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useLoading } from '@sa/hooks';
+import { jwtDecode } from 'jwt-decode';
+import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
+import type { VueKeycloakInstance } from '@dsb-norge/vue-keycloak-js/dist/types';
 import { SetupStoreId } from '@/enum';
 import { useRouterPush } from '@/hooks/common/router';
-import { fetchGetUserInfo, fetchLogin } from '@/service/api';
 import { localStg } from '@/utils/storage';
-import { $t } from '@/locales';
+import type { JwtPayloadExtra } from '@/typings/jwt';
 import { useRouteStore } from '../route';
-import { clearAuthStorage, getToken, getUserInfo } from './shared';
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const routeStore = useRouteStore();
-  const { route, toLogin, redirectFromLogin } = useRouterPush(false);
-  const { loading: loginLoading, startLoading, endLoading } = useLoading();
+  const { route, toLogin } = useRouterPush(false);
+  const { loading: loginLoading } = useLoading();
 
   const token = ref(getToken());
 
@@ -33,62 +34,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       await toLogin();
     }
 
-    routeStore.resetStore();
-  }
-
-  /**
-   * Login
-   *
-   * @param userName User name
-   * @param password Password
-   */
-  async function login(userName: string, password: string) {
-    startLoading();
-
-    const { data: loginToken, error } = await fetchLogin(userName, password);
-
-    if (!error) {
-      const pass = await loginByToken(loginToken);
-
-      if (pass) {
-        await routeStore.initAuthRoute();
-
-        await redirectFromLogin();
-
-        if (routeStore.isInitAuthRoute) {
-          window.$notification?.success({
-            title: $t('page.login.common.loginSuccess'),
-            content: $t('page.login.common.welcomeBack', { userName: userInfo.userName }),
-            duration: 4500
-          });
-        }
-      }
-    } else {
-      resetStore();
-    }
-
-    endLoading();
-  }
-
-  async function loginByToken(loginToken: Api.Auth.LoginToken) {
-    // 1. stored in the localStorage, the later requests need it in headers
-    localStg.set('token', loginToken.token);
-    localStg.set('refreshToken', loginToken.refreshToken);
-
-    const { data: info, error } = await fetchGetUserInfo();
-
-    if (!error) {
-      // 2. store user info
-      localStg.set('userInfo', info);
-
-      // 3. update auth route
-      token.value = loginToken.token;
-      Object.assign(userInfo, info);
-
-      return true;
-    }
-
-    return false;
+    await routeStore.resetStore();
   }
 
   return {
@@ -96,7 +42,34 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     userInfo,
     isLogin,
     loginLoading,
-    resetStore,
-    login
+    resetStore
   };
 });
+
+/** Get user info */
+export function getUserInfo(): Api.Auth.UserInfo {
+  let userInfo = localStg.get('userInfo');
+  if (userInfo === null) {
+    const payload = jwtDecode<JwtPayloadExtra>(getToken());
+    const info = {
+      userId: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+      userName: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+      name: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'],
+      email: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'],
+      roles: payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+    };
+    localStg.set('userInfo', info);
+    userInfo = info;
+  }
+  return userInfo;
+}
+
+export function getToken() {
+  const keycloak = inject(VueKeyCloak.KeycloakSymbol) as VueKeycloakInstance;
+  return keycloak.token || '';
+}
+
+/** Clear auth storage */
+export function clearAuthStorage() {
+  localStg.remove('userInfo');
+}

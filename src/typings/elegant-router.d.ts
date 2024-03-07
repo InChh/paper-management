@@ -22,7 +22,6 @@ declare module "@elegant-router/types" {
     "500": "/500";
     "about": "/about";
     "home": "/home";
-    "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
     "paper": "/paper";
     "paper_list": "/paper/list";
     "worker": "/worker";
@@ -63,7 +62,6 @@ declare module "@elegant-router/types" {
     | "500"
     | "about"
     | "home"
-    | "login"
     | "paper"
     | "worker"
   >;
@@ -85,7 +83,6 @@ declare module "@elegant-router/types" {
     | "403"
     | "404"
     | "500"
-    | "login"
     | "about"
     | "home"
     | "paper_list"

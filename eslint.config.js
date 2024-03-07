@@ -1,4 +1,5 @@
 import { defineConfig } from '@soybeanjs/eslint-config';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig(
   { vue: true, unocss: true },
@@ -17,6 +18,9 @@ export default defineConfig(
           ignores: ['/^icon-/']
         }
       ]
+    },
+    plugins: {
+      eslintConfigPrettier
     }
   }
 );

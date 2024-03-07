@@ -9,6 +9,12 @@ declare namespace Env {
 
   /** Interface for import.meta */
   interface ImportMeta extends ImportMetaEnv {
+    /** The keycloak base url */
+    readonly VITE_KEYCLOAK_URL: string;
+    /** The keycloak realm */
+    readonly VITE_KEYCLOAK_REALM: string;
+    /** The keycloak client id */
+    readonly VITE_KEYCLOAK_CLIENT_ID: string;
     /** The base url of the application */
     readonly VITE_BASE_URL: string;
     /** The title of the application */
@@ -27,12 +33,6 @@ declare namespace Env {
     readonly VITE_ICON_LOCAL_PREFIX: 'local-icon';
     /** backend service base url */
     readonly VITE_SERVICE_BASE_URL: string;
-    /**
-     * other backend service base url
-     *
-     * the value is a json
-     */
-    readonly VITE_OTHER_SERVICE_BASE_URL: string;
     /**
      * Whether to enable the http proxy
      *

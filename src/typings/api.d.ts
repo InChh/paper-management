@@ -59,6 +59,8 @@ declare namespace Api {
     interface UserInfo {
       userId: string;
       userName: string;
+      name: string;
+      email: string;
       roles: string[];
     }
   }

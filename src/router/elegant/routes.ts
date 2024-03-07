@@ -13,8 +13,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: '403',
       i18nKey: 'route.403',
-      constant: true
-    }
+      constant: true,
+    },
   },
   {
     name: '404',
@@ -23,8 +23,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: '404',
       i18nKey: 'route.404',
-      constant: true
-    }
+      constant: true,
+    },
   },
   {
     name: '500',
@@ -33,8 +33,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: '500',
       i18nKey: 'route.500',
-      constant: true
-    }
+      constant: true,
+    },
   },
   {
     name: 'about',
@@ -42,8 +42,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base$view.about',
     meta: {
       title: 'about',
-      i18nKey: 'route.about'
-    }
+      i18nKey: 'route.about',
+    },
   },
   {
     name: 'home',
@@ -52,19 +52,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'home',
       icon: 'bx:home',
-      i18nKey: 'route.home'
-    }
-  },
-  {
-    name: 'login',
-    path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
-    component: 'layout.base$view.login',
-    props: true,
-    meta: {
-      title: 'login',
-      i18nKey: 'route.login',
-      constant: true
-    }
+      i18nKey: 'route.home',
+    },
   },
   {
     name: 'paper',
@@ -73,7 +62,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'paper',
       icon: 'mingcute:paper-line',
-      i18nKey: 'route.paper'
+      i18nKey: 'route.paper',
     },
     children: [
       {
@@ -83,10 +72,10 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'paper_list',
           icon: 'grommet-icons:list',
-          i18nKey: 'route.paper_list'
-        }
-      }
-    ]
+          i18nKey: 'route.paper_list',
+        },
+      },
+    ],
   },
   {
     name: 'worker',
@@ -95,7 +84,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'worker',
       icon: 'octicon:people-16',
-      i18nKey: 'route.worker'
+      i18nKey: 'route.worker',
     },
     children: [
       {
@@ -105,9 +94,9 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'worker_list',
           icon: 'grommet-icons:list',
-          i18nKey: 'route.worker_list'
-        }
-      }
-    ]
-  }
+          i18nKey: 'route.worker_list',
+        },
+      },
+    ],
+  },
 ];
