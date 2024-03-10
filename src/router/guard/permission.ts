@@ -1,6 +1,6 @@
 import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router';
 import type { RouteKey, RoutePath } from '@elegant-router/types';
-import { useAuthStore } from '@/store/modules/auth';
+import { useKeycloak } from '@josempgon/vue-keycloak';
 import { useRouteStore } from '@/store/modules/route';
 
 export function createPermissionGuard(router: Router) {
@@ -20,9 +20,9 @@ export function createPermissionGuard(router: Router) {
       });
     }
 
-    const authStore = useAuthStore();
+    const { isAuthenticated, roles } = useKeycloak();
 
-    const isLogin = Boolean(authStore.token);
+    const isLogin = isAuthenticated.value;
     const needLogin = !to.meta.constant;
     const routeRoles = to.meta.roles || [];
     const noPermissionRoute: RouteKey = '403';
@@ -33,9 +33,7 @@ export function createPermissionGuard(router: Router) {
     // 3. if the user's role is included in the route's "roles", then it is allowed to access
     const SUPER_ADMIN = 'admin';
     const hasPermission =
-      !routeRoles.length ||
-      authStore.userInfo.roles.includes(SUPER_ADMIN) ||
-      authStore.userInfo.roles.some(role => routeRoles.includes(role));
+      !routeRoles.length || roles.value.includes(SUPER_ADMIN) || roles.value.some(role => routeRoles.includes(role));
 
     const strategicPatterns: CommonType.StrategicPattern[] = [
       // 1. if it is login route when logged in, change to the root page

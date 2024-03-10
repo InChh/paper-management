@@ -1,13 +1,13 @@
-import { computed, inject, reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import { useLoading } from '@sa/hooks';
 import { jwtDecode } from 'jwt-decode';
-import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
-import type { VueKeycloakInstance } from '@dsb-norge/vue-keycloak-js/dist/types';
+import { useKeycloak } from '@josempgon/vue-keycloak';
 import { SetupStoreId } from '@/enum';
 import { useRouterPush } from '@/hooks/common/router';
 import { localStg } from '@/utils/storage';
 import type { JwtPayloadExtra } from '@/typings/jwt';
+import type { Api } from '@/typings/api';
 import { useRouteStore } from '../route';
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
@@ -15,12 +15,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const { route, toLogin } = useRouterPush(false);
   const { loading: loginLoading } = useLoading();
 
-  const token = ref(getToken());
-
   const userInfo: Api.Auth.UserInfo = reactive(getUserInfo());
+  const { isAuthenticated } = useKeycloak();
 
   /** Is login */
-  const isLogin = computed(() => Boolean(token.value));
+  const isLogin = isAuthenticated;
 
   /** Reset auth store */
   async function resetStore() {
@@ -38,7 +37,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   return {
-    token,
     userInfo,
     isLogin,
     loginLoading,
@@ -65,8 +63,8 @@ export function getUserInfo(): Api.Auth.UserInfo {
 }
 
 export function getToken() {
-  const keycloak = inject(VueKeyCloak.KeycloakSymbol) as VueKeycloakInstance;
-  return keycloak.token || '';
+  const { token } = useKeycloak();
+  return token.value || '';
 }
 
 /** Clear auth storage */

@@ -213,6 +213,28 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean just wrote some of the workbench pages casually, and it was enough to see!'
       },
       creativity: 'Creativity'
+    },
+    paper: {
+      name: '客户名称',
+      phoneNumber: '联系电话',
+      address: '地址',
+      problemType: '问题类型',
+      problemDescription: '问题描述',
+      solution: '解决方案',
+      status: '状态',
+      statusEnum: {
+        unprocessed: '未处理',
+        processed: '已处理',
+        deprecated: '废单'
+      },
+      worker: '出单队员',
+      workerId: '出单队员工号',
+      workerName: '出单队员姓名',
+      receiverName: '接单队员',
+      receiverId: '接单队员工号',
+      receiveTime: '登单时间',
+      completeTime: '还单时间',
+      note: '备注'
     }
   },
   form: {

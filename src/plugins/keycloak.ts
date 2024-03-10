@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 import type { KeycloakConfig } from 'keycloak-js';
-import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
-import type { VueKeycloakInstance } from '@dsb-norge/vue-keycloak-js/dist/types';
+import { vueKeycloak } from '@josempgon/vue-keycloak';
+import { initApplication } from '@/service/api';
 
 export function setupKeycloak(app: App<Element>, onReady: () => void) {
   const config: KeycloakConfig = {
@@ -10,19 +10,12 @@ export function setupKeycloak(app: App<Element>, onReady: () => void) {
     clientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID
   };
 
-  app.use(VueKeyCloak, {
-    config,
-    init: {
-      onLoad: 'login-required'
-    },
-    onReady(_keycloak) {
-      onReady();
-    }
+  app.use(vueKeycloak, {
+    config
   });
-}
-
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $keycloak: VueKeycloakInstance;
-  }
+  app.config.globalProperties.$keycloak.onReady = (_: boolean) => {
+    initApplication().then(_res => {
+      onReady();
+    });
+  };
 }

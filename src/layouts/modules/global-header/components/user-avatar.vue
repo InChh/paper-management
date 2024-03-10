@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import type { VNode } from 'vue';
 import { useSvgIconRender } from '@sa/hooks';
-import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
-import type { VueKeycloakInstance } from '@dsb-norge/vue-keycloak-js/dist/types';
+import { useKeycloak } from '@josempgon/vue-keycloak';
 import { useAuthStore } from '@/store/modules/auth';
 import { useRouterPush } from '@/hooks/common/router';
 import { $t } from '@/locales';
@@ -16,7 +15,7 @@ defineOptions({
 const authStore = useAuthStore();
 const { routerPushByKey, toLogin } = useRouterPush();
 const { SvgIconVNode } = useSvgIconRender(SvgIcon);
-const keycloak = inject(VueKeyCloak.KeycloakSymbol) as VueKeycloakInstance;
+const { keycloak } = useKeycloak();
 
 function loginOrRegister() {
   toLogin();
@@ -54,8 +53,7 @@ function logout() {
     positiveText: $t('common.confirm'),
     negativeText: $t('common.cancel'),
     onPositiveClick: async () => {
-      const logoutFn = keycloak.logoutFn;
-      await logoutFn?.({ redirectUri: window.location.origin });
+      await keycloak.logout({ redirectUri: window.location.origin });
       await authStore.resetStore();
     }
   });
