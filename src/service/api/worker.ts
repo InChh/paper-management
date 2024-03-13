@@ -5,7 +5,7 @@ export function getWorkerList(params: Api.Common.PaginatingCommonParams) {
   return request<Api.Common.PaginatingResponse<Api.Worker.WorkerRecord>>({
     url: '/app/worker',
     method: 'GET',
-    data: params
+    params
   });
 }
 

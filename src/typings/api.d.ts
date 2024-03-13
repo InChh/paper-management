@@ -11,9 +11,9 @@ declare namespace Api {
     interface PaginatingCommonParams {
       skipCount: number;
       maxResultCount: number;
-      sorting?: string;
-      filterField?: string;
-      filterValue?: string;
+      sorting?: string | null;
+      filterField?: string | null;
+      filterValue?: string | null;
     }
 
     interface PaginatingResponse<T extends NonNullable<unknown>> {
@@ -23,13 +23,13 @@ declare namespace Api {
 
     interface CommonRecord {
       id: string;
-      creatorId: string;
-      creationTime: string;
-      lastModifierId?: string;
-      lastModificationTime?: string;
-      isDeleted: boolean;
-      deleterId?: string;
-      deletionTime?: string;
+      creatorId: string | null;
+      creationTime: string | null;
+      lastModifierId: string | null;
+      lastModificationTime: string | null;
+      isDeleted: boolean | null;
+      deleterId: string | null;
+      deletionTime: string | null;
     }
   }
   namespace Paper {
@@ -41,13 +41,13 @@ declare namespace Api {
       problemDescription: string;
       solution: string | null;
       status: PaperStatus;
-      receiverId: number;
+      receiverId: number | null;
       receiverName: string;
       workerId: number | null;
       workerName: string | null;
       worker2Id: number | null;
       worker2Name: string | null;
-      receiveTime: string;
+      receiveTime: string | null;
       completeTime: string | null;
       note: string | null;
     }
@@ -58,14 +58,14 @@ declare namespace Api {
       address: string;
       problemType: string;
       problemDescription: string;
-      solution?: string;
+      solution: string | null;
       status: PaperStatus;
-      receiverId: number;
-      workerId?: number;
-      worker2Id?: number;
-      receiveTime: string;
-      completeTime?: string;
-      note?: string;
+      receiverId: number | null;
+      workerId: number | null;
+      worker2Id: number | null;
+      receiveTime: string | null;
+      completeTime: string | null;
+      note: string | null;
     }
   }
 

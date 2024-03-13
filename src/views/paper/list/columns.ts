@@ -1,6 +1,5 @@
 import type { DataTableColumns } from 'naive-ui';
 import { h } from 'vue';
-import { useKeycloak } from '@josempgon/vue-keycloak';
 import { NButton, NDescriptions, NDescriptionsItem, NPopconfirm, NTag } from 'naive-ui';
 import { $t } from '@/locales';
 import { PaperStatus } from '@/constants/paper';
@@ -193,10 +192,6 @@ export const createColumns = ({
       title: $t('common.action'),
       key: 'actions',
       width: 200,
-      disabled(_row: object) {
-        const { hasRoles } = useKeycloak();
-        return hasRoles(['worker']);
-      },
       render(rowData, _rowIndex) {
         return h('div', null, {
           default: () => [
@@ -206,7 +201,7 @@ export const createColumns = ({
                 type: 'primary',
                 style: 'margin-right: 8px',
                 round: true,
-                onClick: () => handleEdit(rowData)
+                onClick: async () => await handleEdit(rowData)
               },
               {
                 default: () => $t('common.edit')
@@ -215,7 +210,7 @@ export const createColumns = ({
             h(
               NPopconfirm,
               {
-                onPositiveClick: () => handleDelete(rowData.id)
+                onPositiveClick: async () => await handleDelete(rowData.id)
               },
               {
                 trigger: () =>

@@ -12,10 +12,14 @@ const local: App.I18n.Schema = {
     check: 'Check',
     columnSetting: 'Column Setting',
     confirm: 'Confirm',
+    clear: 'Clear',
     delete: 'Delete',
     deleteSuccess: 'Delete Success',
     confirmDelete: 'Are you sure you want to delete?',
     edit: 'Edit',
+    filterField: 'Filter Field',
+    filterValue: 'Filter Value',
+    fieldRequiredMessage: 'The {field} is required',
     index: 'Index',
     logout: 'Logout',
     logoutConfirm: 'Are you sure you want to log out?',
@@ -215,26 +219,35 @@ const local: App.I18n.Schema = {
       creativity: 'Creativity'
     },
     paper: {
-      name: '客户名称',
-      phoneNumber: '联系电话',
-      address: '地址',
-      problemType: '问题类型',
-      problemDescription: '问题描述',
-      solution: '解决方案',
-      status: '状态',
+      name: 'Client Name',
+      phoneNumber: 'Phone Number',
+      address: 'Address',
+      problemType: 'Problem Type',
+      problemDescription: 'Problem Description',
+      solution: 'Solution',
+      status: 'Status',
       statusEnum: {
-        unprocessed: '未处理',
-        processed: '已处理',
-        deprecated: '废单'
+        unprocessed: 'Unprocessed',
+        processed: 'Processed',
+        deprecated: 'Deprecated'
       },
-      worker: '出单队员',
-      workerId: '出单队员工号',
-      workerName: '出单队员姓名',
-      receiverName: '接单队员',
-      receiverId: '接单队员工号',
-      receiveTime: '登单时间',
-      completeTime: '还单时间',
-      note: '备注'
+      systemType: 'System Type',
+      deviceType: 'Device Type',
+      deviceTypeEnum: {
+        pc: 'PC',
+        laptop: 'Laptop',
+        phone: 'Phone',
+        other: 'Other'
+      },
+      worker: 'Worker',
+      workerId: 'Worker ID',
+      workerName: 'Worker Name',
+      receiver: 'Receiver',
+      receiverName: 'Receiver Name',
+      receiverId: 'Receiver ID',
+      receiveTime: 'Receive Time',
+      completeTime: 'Complete Time',
+      note: 'Note'
     }
   },
   form: {

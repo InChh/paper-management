@@ -258,10 +258,14 @@ declare namespace App {
         check: string;
         columnSetting: string;
         confirm: string;
+        clear: string;
         delete: string;
         deleteSuccess: string;
         confirmDelete: string;
         edit: string;
+        filterField: string;
+        filterValue: string;
+        fieldRequiredMessage: string;
         index: string;
         logout: string;
         logoutConfirm: string;
@@ -422,6 +426,14 @@ declare namespace App {
           phoneNumber: string;
           address: string;
           problemType: string;
+          systemType: string;
+          deviceType: string;
+          deviceTypeEnum: {
+            pc: string;
+            laptop: string;
+            phone: string;
+            other: string;
+          };
           problemDescription: string;
           solution: string;
           status: string;
@@ -431,6 +443,7 @@ declare namespace App {
             deprecated: string;
           };
           receiverId: string;
+          receiver: string;
           receiverName: string;
           worker: string;
           workerId: string;

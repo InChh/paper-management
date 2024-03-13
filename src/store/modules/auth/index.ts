@@ -62,7 +62,7 @@ export function getUserInfo(): Api.Auth.UserInfo {
   return userInfo;
 }
 
-export function getToken() {
+function getToken() {
   const { token } = useKeycloak();
   return token.value || '';
 }
