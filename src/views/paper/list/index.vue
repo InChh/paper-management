@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue';
 import type { PaginationProps } from 'naive-ui/es/pagination/src/Pagination';
-import type { SelectOption } from 'naive-ui';
+import type { DataTableSortState, SelectOption } from 'naive-ui';
 import { createColumns } from '@/views/paper/list/columns';
 import { createPaper, deletePaper, getPaperList, updatePaper } from '@/service/api';
 import type { Api } from '@/typings/api';
@@ -90,10 +90,19 @@ function handlePageSizeChange(pageSize: number) {
   fetchData(1, pageSize);
 }
 
-function handleSorterChange() {}
+function handleSorterChange(sorter: DataTableSortState | null) {
+  if (sorter && sorter.order) {
+    sortingRef.value = `${sorter.columnKey} ${sorter.order === 'ascend' ? 'asc' : 'desc'}`;
+  } else {
+    sortingRef.value = '';
+  }
+  fetchData(pagination.page, pagination.pageSize, sortingRef.value, filterFieldRef.value, filterValueRef.value);
+}
 
 const paperRecord = ref<Api.Paper.PaperRecord>(defaultPaper);
 const showModal = ref(false);
+
+const modalLoading = ref(false);
 
 async function showAddModal() {
   paperRecord.value = defaultPaper;
@@ -101,21 +110,27 @@ async function showAddModal() {
 }
 
 async function showEditModal(paper: Api.Paper.PaperRecord) {
-  paperRecord.value = { ...paper };
+  paperRecord.value = paper;
   showModal.value = true;
 }
 
 async function handleAdd(paper: Api.Paper.PaperRecord) {
+  modalLoading.value = true;
   await createPaper({
     ...paper
   });
+  modalLoading.value = false;
+  showModal.value = false;
   await fetchData(pagination.page, pagination.pageSize, sortingRef.value, filterFieldRef.value, filterValueRef.value);
 }
 
 async function handleEdit(paper: Api.Paper.PaperRecord) {
+  modalLoading.value = true;
   await updatePaper(paper.id, {
     ...paper
   });
+  modalLoading.value = false;
+  showModal.value = false;
   await fetchData(pagination.page, pagination.pageSize, sortingRef.value, filterFieldRef.value, filterValueRef.value);
 }
 
@@ -183,7 +198,13 @@ async function handleClearSearch() {
       @update:page="handlePageChange"
       @update:page-size="handlePageSizeChange"
     />
-    <AddEditModal v-model:show-modal="showModal" :paper="paperRecord" @on-add="handleAdd" @on-edit="handleEdit" />
+    <AddEditModal
+      v-model:show-modal="showModal"
+      :paper="paperRecord"
+      :loading="modalLoading"
+      @on-add="handleAdd"
+      @on-edit="handleEdit"
+    />
   </div>
 </template>
 

@@ -245,7 +245,7 @@ const local: App.I18n.Schema = {
       receiver: '接单队员',
       receiverName: '接单队员姓名',
       receiverId: '接单队员工号',
-      receiveTime: '登单时间',
+      receiveTime: '拿单时间',
       completeTime: '还单时间',
       note: '备注'
     }

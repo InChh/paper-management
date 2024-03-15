@@ -100,11 +100,12 @@ export const createColumns = ({
     {
       title: $t('page.paper.name'),
       key: 'name',
-      width: 200
+      sorter: true
     },
     {
       title: $t('page.paper.phoneNumber'),
-      key: 'phoneNumber'
+      key: 'phoneNumber',
+      sorter: true
     },
     {
       title: $t('page.paper.problemDescription'),
@@ -114,6 +115,7 @@ export const createColumns = ({
       title: $t('page.paper.status'),
       key: 'status',
       width: 200,
+      sorter: true,
       render(rowData, _rowIndex) {
         const status = rowData.status;
         return h(
@@ -142,6 +144,7 @@ export const createColumns = ({
     {
       title: $t('page.paper.worker'),
       key: 'workerId',
+      sorter: true,
       render(rowData, _rowIndex) {
         const workerId = rowData.workerId;
         const workerName = rowData.workerName;
@@ -186,7 +189,8 @@ export const createColumns = ({
     },
     {
       title: $t('page.paper.receiveTime'),
-      key: 'receiveTime'
+      key: 'receiveTime',
+      sorter: true
     },
     {
       title: $t('common.action'),

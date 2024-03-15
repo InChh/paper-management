@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, h, onMounted, ref, toRaw, watch } from 'vue';
+import { computed, onMounted, ref, toRaw, watch } from 'vue';
 import type { FormInst, FormRules, SelectOption } from 'naive-ui';
 import { NButton } from 'naive-ui';
 import type { Api } from '@/typings/api';
@@ -10,9 +10,11 @@ import { $t } from '@/locales';
 const props = withDefaults(
   defineProps<{
     paper?: Api.Paper.PaperRecord;
+    loading?: boolean;
   }>(),
   {
-    paper: () => defaultPaper
+    paper: () => defaultPaper,
+    loading: false
   }
 );
 
@@ -32,6 +34,8 @@ const paperRecord = ref<Api.Paper.PaperRecord>(defaultPaper);
 const deviceType = ref('');
 const systemType = ref('');
 
+const buttonLoading = ref(false);
+
 watch(
   () => props.paper,
   newVal => {
@@ -45,14 +49,20 @@ watch(
     }
   }
 );
+
+watch(
+  () => props.loading,
+  newVal => {
+    buttonLoading.value = newVal;
+  }
+);
+
 const workerOptions = ref<SelectOption[]>([]);
 
 const selectLoading = ref(false);
-
 onMounted(async () => {
   await fetchWorkerOptions();
 });
-
 async function fetchWorkerOptions() {
   selectLoading.value = true;
   const res = await getWorkerList({
@@ -131,30 +141,9 @@ function handlePositiveClick() {
       } else {
         emit('onAdd', record);
       }
-      showModal.value = false;
     }
   });
 }
-
-const action = () => [
-  h(
-    NButton,
-    {
-      onClick: () => {
-        showModal.value = false;
-      }
-    },
-    () => $t('common.cancel')
-  ),
-  h(
-    NButton,
-    {
-      type: 'primary',
-      onClick: handlePositiveClick
-    },
-    () => (isEdit.value ? $t('common.edit') : $t('common.add'))
-  )
-];
 </script>
 
 <template>
@@ -163,10 +152,6 @@ const action = () => [
     preset="dialog"
     :title="isEdit ? $t('common.edit') : $t('common.add')"
     :rules="rules"
-    :positive-text="isEdit ? $t('common.edit') : $t('common.add')"
-    :negative-text="$t('common.cancel')"
-    :action="action"
-    @positive-click="handlePositiveClick"
   >
     <n-form ref="formRef" :model="paperRecord" :rules="rules">
       <n-form-item path="name" :label="$t('page.paper.name')">
@@ -229,9 +214,18 @@ const action = () => [
         ></n-select>
       </n-form-item>
       <n-form-item path="receiveTime" :label="$t('page.paper.receiveTime')">
+        <!--https://github.com/date-fns/date-fns/issues/1643-->
         <n-date-picker
           v-model:formatted-value="paperRecord.receiveTime"
-          value-format="yyyy-MM-dd HH:mm:ss.S"
+          value-format="yyyy-MM-dd'T'HH:mm:ss"
+          type="datetime"
+          clearable
+        />
+      </n-form-item>
+      <n-form-item path="completeTime" :label="$t('page.paper.completeTime')">
+        <n-date-picker
+          v-model:formatted-value="paperRecord.completeTime"
+          value-format="yyyy-MM-dd'T'HH:mm:ss"
           type="datetime"
           clearable
         />
@@ -267,6 +261,14 @@ const action = () => [
         <n-input v-model:value="paperRecord.solution" type="textarea" :placeholder="$t('page.paper.solution')" />
       </n-form-item>
     </n-form>
+    <template #action>
+      <n-flex>
+        <NButton type="default" @click="() => (showModal = false)">{{ $t('common.cancel') }}</NButton>
+        <NButton type="primary" :loading="buttonLoading" @click="handlePositiveClick">
+          {{ isEdit ? $t('common.edit') : $t('common.add') }}
+        </NButton>
+      </n-flex>
+    </template>
   </n-modal>
 </template>
 
