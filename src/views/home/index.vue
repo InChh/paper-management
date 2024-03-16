@@ -7,6 +7,7 @@ import CardData from '@/views/home/modules/card-data.vue';
   <NSpace vertical :size="16">
     <HeaderBanner />
     <CardData />
+    <NCard>计划在此处整合李磊开发的排版系统</NCard>
   </NSpace>
 </template>
 
