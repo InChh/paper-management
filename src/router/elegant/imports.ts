@@ -24,7 +24,6 @@ export const views: Record<
   403: () => import('@/views/_builtin/403/index.vue'),
   404: () => import('@/views/_builtin/404/index.vue'),
   500: () => import('@/views/_builtin/500/index.vue'),
-  about: () => import('@/views/about/index.vue'),
   home: () => import('@/views/home/index.vue'),
   paper_list: () => import('@/views/paper/list/index.vue'),
   worker_list: () => import('@/views/worker/list/index.vue'),

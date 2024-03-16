@@ -71,19 +71,19 @@ declare namespace Api {
 
   namespace Worker {
     interface WorkerRecord extends Common.CommonRecord {
-      name: string;
-      workerId: number;
-      userId: string;
+      name: string | null;
+      workerId: number | null;
+      userId: string | null;
     }
 
     interface CreateWorkerParams {
-      name: string;
-      workerId: number;
-      userId: string;
+      name: string | null;
+      workerId: number | null;
+      userId: string | null;
     }
 
     interface UpdateWorkerParams {
-      name: string;
+      name: string | null;
     }
   }
 
@@ -94,8 +94,8 @@ declare namespace Api {
    */
   namespace Auth {
     interface UserInfo {
-      userId: string;
-      userName: string;
+      id: string;
+      username: string;
       name: string;
       email: string;
       roles: string[];

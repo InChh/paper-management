@@ -127,7 +127,6 @@ const local: App.I18n.Schema = {
     404: '页面不存在',
     500: '服务器错误',
     home: '首页',
-    about: '关于',
     paper: '服务单',
     paper_list: '查询服务单',
     worker: '网服队员',
@@ -248,6 +247,11 @@ const local: App.I18n.Schema = {
       receiveTime: '拿单时间',
       completeTime: '还单时间',
       note: '备注'
+    },
+    worker: {
+      name: '队员姓名',
+      userId: '用户id',
+      workerId: '队员工号'
     }
   },
   form: {

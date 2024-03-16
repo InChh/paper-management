@@ -452,6 +452,11 @@ declare namespace App {
           completeTime: string;
           note: string;
         };
+        worker: {
+          name: string;
+          userId: string;
+          workerId: string;
+        };
       };
       form: {
         required: string;

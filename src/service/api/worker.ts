@@ -31,12 +31,12 @@ export function createWorker(params: Api.Worker.CreateWorkerParams) {
   });
 }
 
-export function updateWorker(id: string, params: Api.Worker.UpdateWorkerParams) {
+export function updateWorker(userId: string, params: Api.Worker.UpdateWorkerParams) {
   return request<Api.Worker.WorkerRecord>({
     url: `/app/worker`,
     method: 'PUT',
     data: params,
-    params: { id }
+    params: { userId }
   });
 }
 

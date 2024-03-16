@@ -20,7 +20,6 @@ declare module "@elegant-router/types" {
     "403": "/403";
     "404": "/404";
     "500": "/500";
-    "about": "/about";
     "home": "/home";
     "paper": "/paper";
     "paper_list": "/paper/list";
@@ -60,7 +59,6 @@ declare module "@elegant-router/types" {
     | "403"
     | "404"
     | "500"
-    | "about"
     | "home"
     | "paper"
     | "worker"
@@ -83,7 +81,6 @@ declare module "@elegant-router/types" {
     | "403"
     | "404"
     | "500"
-    | "about"
     | "home"
     | "paper_list"
     | "worker_list"

@@ -127,7 +127,6 @@ const local: App.I18n.Schema = {
     404: 'Page Not Found',
     500: 'Server Error',
     home: 'Home',
-    about: 'About',
     paper: 'Paper',
     paper_list: 'Paper List',
     worker: 'Worker',
@@ -248,6 +247,11 @@ const local: App.I18n.Schema = {
       receiveTime: 'Receive Time',
       completeTime: 'Complete Time',
       note: 'Note'
+    },
+    worker: {
+      name: 'Worker Name',
+      userId: 'User ID',
+      workerId: 'Worker ID'
     }
   },
   form: {

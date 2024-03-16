@@ -72,7 +72,7 @@ async function fetchWorkerOptions() {
   if (res.data) {
     workerOptions.value = res.data.items.map(item => ({
       label: `${item.name}(${item.workerId})`,
-      value: item.workerId
+      value: item.workerId || 0
     }));
   }
   selectLoading.value = false;
