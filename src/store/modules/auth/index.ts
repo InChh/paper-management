@@ -51,7 +51,7 @@ export function getUserInfo(): Api.Auth.UserInfo {
     const payload = jwtDecode<JwtPayloadExtra>(getToken());
     const info = {
       userId: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
-      userName: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+      username: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
       name: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'],
       email: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'],
       roles: payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']

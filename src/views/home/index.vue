@@ -1,11 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeaderBanner from '@/views/home/modules/head-banner.vue';
+import CardData from '@/views/home/modules/card-data.vue';
+</script>
 
 <template>
-  <NCard title="首页">
-    这里是首页
-    <br />
-    施工中
-  </NCard>
+  <HeaderBanner />
+  <CardData />
 </template>
 
 <style scoped></style>

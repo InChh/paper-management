@@ -9,6 +9,7 @@ declare namespace Env {
 
   /** Interface for import.meta */
   interface ImportMeta extends ImportMetaEnv {
+    readonly VITE_WEATHER_API_KEY: string;
     /** The keycloak base url */
     readonly VITE_KEYCLOAK_URL: string;
     /** The keycloak realm */
