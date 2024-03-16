@@ -4,8 +4,10 @@ import CardData from '@/views/home/modules/card-data.vue';
 </script>
 
 <template>
-  <HeaderBanner />
-  <CardData />
+  <NSpace vertical :size="16">
+    <HeaderBanner />
+    <CardData />
+  </NSpace>
 </template>
 
 <style scoped></style>

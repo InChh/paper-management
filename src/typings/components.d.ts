@@ -17,7 +17,6 @@ declare module 'vue' {
     IconAntDesignReloadOutlined: (typeof import('~icons/ant-design/reload-outlined'))['default'];
     IconGridiconsFullscreen: (typeof import('~icons/gridicons/fullscreen'))['default'];
     IconGridiconsFullscreenExit: (typeof import('~icons/gridicons/fullscreen-exit'))['default'];
-    IconLocalBanner: (typeof import('~icons/local/banner'))['default'];
     LangSwitch: (typeof import('./../components/common/lang-switch.vue'))['default'];
     LookForward: (typeof import('./../components/custom/look-forward.vue'))['default'];
     MenuToggler: (typeof import('./../components/common/menu-toggler.vue'))['default'];
@@ -29,8 +28,6 @@ declare module 'vue' {
     NColorPicker: (typeof import('naive-ui'))['NColorPicker'];
     NDataTable: (typeof import('naive-ui'))['NDataTable'];
     NDatePicker: (typeof import('naive-ui'))['NDatePicker'];
-    NDescriptions: (typeof import('naive-ui'))['NDescriptions'];
-    NDescriptionsItem: (typeof import('naive-ui'))['NDescriptionsItem'];
     NDialogProvider: (typeof import('naive-ui'))['NDialogProvider'];
     NDivider: (typeof import('naive-ui'))['NDivider'];
     NDrawer: (typeof import('naive-ui'))['NDrawer'];
@@ -44,8 +41,6 @@ declare module 'vue' {
     NGridItem: (typeof import('naive-ui'))['NGridItem'];
     NInput: (typeof import('naive-ui'))['NInput'];
     NInputNumber: (typeof import('naive-ui'))['NInputNumber'];
-    NList: (typeof import('naive-ui'))['NList'];
-    NListItem: (typeof import('naive-ui'))['NListItem'];
     NLoadingBarProvider: (typeof import('naive-ui'))['NLoadingBarProvider'];
     NMenu: (typeof import('naive-ui'))['NMenu'];
     NMessageProvider: (typeof import('naive-ui'))['NMessageProvider'];
@@ -55,12 +50,9 @@ declare module 'vue' {
     NRadioGroup: (typeof import('naive-ui'))['NRadioGroup'];
     NSelect: (typeof import('naive-ui'))['NSelect'];
     NSpace: (typeof import('naive-ui'))['NSpace'];
-    NStatistic: (typeof import('naive-ui'))['NStatistic'];
     NSwitch: (typeof import('naive-ui'))['NSwitch'];
     NTab: (typeof import('naive-ui'))['NTab'];
     NTabs: (typeof import('naive-ui'))['NTabs'];
-    NTag: (typeof import('naive-ui'))['NTag'];
-    NThing: (typeof import('naive-ui'))['NThing'];
     NTooltip: (typeof import('naive-ui'))['NTooltip'];
     PinToggler: (typeof import('./../components/common/pin-toggler.vue'))['default'];
     ReloadButton: (typeof import('./../components/common/reload-button.vue'))['default'];
