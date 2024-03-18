@@ -230,6 +230,10 @@ const local: App.I18n.Schema = {
       name: '队员姓名',
       userId: '用户id',
       workerId: '队员工号'
+    },
+    statistic: {
+      title: '出单统计',
+      resolveCount: '出单量'
     }
   },
   form: {

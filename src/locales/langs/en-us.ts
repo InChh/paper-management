@@ -230,6 +230,10 @@ const local: App.I18n.Schema = {
       name: 'Worker Name',
       userId: 'User ID',
       workerId: 'Worker ID'
+    },
+    statistic: {
+      title: 'Statistic',
+      resolveCount: 'Resolve Count'
     }
   },
   form: {

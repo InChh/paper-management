@@ -133,6 +133,19 @@ declare namespace Api {
     }
   }
 
+  namespace Statistic {
+    interface WorkerStatisticInfo {
+      workerName: string;
+      workerId: number;
+      resolveCount: number;
+    }
+
+    interface StatisticParams extends Common.PaginatingCommonParams {
+      startTime: string;
+      endTime: string;
+    }
+  }
+
   /**
    * namespace Route
    *

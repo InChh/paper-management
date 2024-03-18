@@ -435,6 +435,10 @@ declare namespace App {
           userId: string;
           workerId: string;
         };
+        statistic: {
+          title: string;
+          resolveCount: string;
+        };
       };
       form: {
         required: string;
