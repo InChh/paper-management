@@ -15,7 +15,7 @@ const loading = ref(false);
 
 const pagination = reactive({
   page: 1,
-  pageCount: 1,
+  itemCount: 0,
   pageSize: 10,
   prefix({ itemCount }: { itemCount: number }) {
     return `共有 ${itemCount} 条数据.`;
@@ -80,7 +80,7 @@ async function fetchData(
   const response = await getPaperList(params);
   if (response.data) {
     data.value = response.data.items;
-    pagination.pageCount = response.data.totalCount;
+    pagination.itemCount = response.data.totalCount;
   }
   loading.value = false;
 }
