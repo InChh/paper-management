@@ -9,6 +9,7 @@ import { $t } from '@/locales';
 import { defaultWorker } from '@/constants/worker';
 import AddEditModal from '@/views/worker/list/add-edit-modal.vue';
 import { useAuthStore } from '@/store/modules/auth';
+import { CommonRole } from '@/constants/common';
 
 const data = ref<Api.Worker.WorkerRecord[]>([]);
 const loading = ref(false);
@@ -128,7 +129,11 @@ async function handleRefresh() {
           <n-button @click="handleRefresh">
             <svg-icon icon="material-symbols:refresh" />
           </n-button>
-          <n-button v-if="userInfo.roles.includes('admin')" type="primary" @click="showAddModal">
+          <n-button
+            v-if="userInfo.roles.includes(CommonRole.Leader) || userInfo.roles.includes(CommonRole.Admin)"
+            type="primary"
+            @click="showAddModal"
+          >
             {{ $t('common.add') }}
           </n-button>
         </n-flex>
@@ -140,7 +145,7 @@ async function handleRefresh() {
         createColumns({
           handleEdit: showEditModal,
           handleDelete,
-          showEditDelete: userInfo.roles.includes('admin')
+          showEditDelete: userInfo.roles.includes(CommonRole.Leader) || userInfo.roles.includes(CommonRole.Admin)
         })
       "
       :data="data"

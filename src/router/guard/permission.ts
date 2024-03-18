@@ -3,6 +3,7 @@ import type { RouteKey, RoutePath } from '@elegant-router/types';
 import { useKeycloak } from '@josempgon/vue-keycloak';
 import { useRouteStore } from '@/store/modules/route';
 import { useAuthStore } from '@/store/modules/auth';
+import { CommonRole } from '@/constants/common';
 
 export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
@@ -34,9 +35,8 @@ export function createPermissionGuard(router: Router) {
     // 1. if the route's "roles" is empty, then it is allowed to access
     // 2. if the user is super admin, then it is allowed to access
     // 3. if the user's role is included in the route's "roles", then it is allowed to access
-    const SUPER_ADMIN = 'admin';
     const hasPermission =
-      !routeRoles.length || roles.includes(SUPER_ADMIN) || roles.some(role => routeRoles.includes(role));
+      !routeRoles.length || roles.includes(CommonRole.Admin) || roles.some(role => routeRoles.includes(role));
 
     const strategicPatterns: CommonType.StrategicPattern[] = [
       // 1. if it is login route when logged in, change to the root page

@@ -9,6 +9,7 @@ import { $t } from '@/locales';
 import { PaperStatus, defaultPaper } from '@/constants/paper';
 import AddEditModal from '@/views/paper/list/add-edit-modal.vue';
 import { useAuthStore } from '@/store/modules/auth';
+import { CommonRole } from '@/constants/common';
 
 const data = ref<Api.Paper.PaperRecord[]>([]);
 const loading = ref(false);
@@ -185,7 +186,7 @@ async function handleClearSearch() {
           <n-button @click="handleRefresh">
             <svg-icon icon="material-symbols:refresh" />
           </n-button>
-          <n-button v-if="userInfo.roles.includes('worker')" type="primary" @click="showAddModal">
+          <n-button v-if="userInfo.roles.includes(CommonRole.Worker)" type="primary" @click="showAddModal">
             {{ $t('common.add') }}
           </n-button>
         </n-flex>
@@ -198,7 +199,7 @@ async function handleClearSearch() {
         createColumns({
           handleEdit: showEditModal,
           handleDelete,
-          showEditDelete: userInfo.roles.includes('worker')
+          showEditDelete: userInfo.roles.includes(CommonRole.Worker)
         })
       "
       :data="data"

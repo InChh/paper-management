@@ -6,3 +6,9 @@ export const yesOrNoRecord: Record<CommonType.YesOrNo, App.I18n.I18nKey> = {
 };
 
 export const yesOrNoOptions = transformRecordToOption(yesOrNoRecord);
+
+export enum CommonRole {
+  Leader = 'leader',
+  Worker = 'worker',
+  Admin = 'admin'
+}
