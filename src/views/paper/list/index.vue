@@ -8,6 +8,7 @@ import type { Api } from '@/typings/api';
 import { $t } from '@/locales';
 import { PaperStatus, defaultPaper } from '@/constants/paper';
 import AddEditModal from '@/views/paper/list/add-edit-modal.vue';
+import { useAuthStore } from '@/store/modules/auth';
 
 const data = ref<Api.Paper.PaperRecord[]>([]);
 const loading = ref(false);
@@ -52,6 +53,8 @@ const selectOptions = reactive<SelectOption[]>([
   { label: $t('page.paper.workerId'), value: 'WorkerId' },
   { label: $t('page.paper.status'), value: 'Status' }
 ]);
+
+const { userInfo } = useAuthStore();
 
 onMounted(async () => {
   await fetchData(pagination.page, pagination.pageSize);
@@ -182,14 +185,22 @@ async function handleClearSearch() {
           <n-button @click="handleRefresh">
             <svg-icon icon="material-symbols:refresh" />
           </n-button>
-          <n-button type="primary" @click="showAddModal">{{ $t('common.add') }}</n-button>
+          <n-button v-if="userInfo.roles.includes('worker')" type="primary" @click="showAddModal">
+            {{ $t('common.add') }}
+          </n-button>
         </n-flex>
       </n-grid-item>
     </n-grid>
     <n-data-table
       ref="table"
       remote
-      :columns="createColumns({ handleEdit: showEditModal, handleDelete })"
+      :columns="
+        createColumns({
+          handleEdit: showEditModal,
+          handleDelete,
+          showEditDelete: userInfo.roles.includes('worker')
+        })
+      "
       :data="data"
       :row-key="(rowData: Api.Paper.PaperRecord) => rowData.id"
       :loading="loading"

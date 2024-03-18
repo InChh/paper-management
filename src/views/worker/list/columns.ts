@@ -5,12 +5,14 @@ import { createEditDeleteActionsColumn } from '@/utils/common';
 
 export const createColumns = ({
   handleEdit,
-  handleDelete
+  handleDelete,
+  showEditDelete
 }: {
   handleEdit: (rowData: Api.Worker.WorkerRecord) => Promise<any>;
   handleDelete: (id: string) => Promise<any>;
+  showEditDelete: boolean;
 }): DataTableColumns<Api.Worker.WorkerRecord> => {
-  return [
+  const columns: DataTableColumns<Api.Worker.WorkerRecord> = [
     {
       title: $t('page.worker.name'),
       key: 'name',
@@ -20,10 +22,15 @@ export const createColumns = ({
       title: $t('page.worker.workerId'),
       key: 'workerId',
       sorter: true
-    },
-    createEditDeleteActionsColumn(
-      async rowData => await handleEdit(rowData),
-      async rowData => await handleDelete(rowData.userId!)
-    )
+    }
   ];
+  if (showEditDelete) {
+    columns.push(
+      createEditDeleteActionsColumn(
+        async rowData => await handleEdit(rowData),
+        async rowData => await handleDelete(rowData.userId!)
+      )
+    );
+  }
+  return columns;
 };

@@ -1,18 +1,21 @@
 import type { DataTableColumns } from 'naive-ui';
 import { h } from 'vue';
-import { NButton, NDescriptions, NDescriptionsItem, NPopconfirm, NTag } from 'naive-ui';
+import { NDescriptions, NDescriptionsItem, NTag } from 'naive-ui';
 import { $t } from '@/locales';
 import { PaperStatus } from '@/constants/paper';
 import type { Api } from '@/typings/api';
+import { createEditDeleteActionsColumn } from '@/utils/common';
 
 export const createColumns = ({
   handleEdit,
-  handleDelete
+  handleDelete,
+  showEditDelete
 }: {
   handleEdit: (rowData: Api.Paper.PaperRecord) => Promise<any>;
   handleDelete: (id: string) => Promise<any>;
+  showEditDelete: boolean;
 }): DataTableColumns<Api.Paper.PaperRecord> => {
-  return [
+  const columns: DataTableColumns<Api.Paper.PaperRecord> = [
     {
       type: 'expand',
       renderExpand: rowData => {
@@ -191,50 +194,15 @@ export const createColumns = ({
       title: $t('page.paper.receiveTime'),
       key: 'receiveTime',
       sorter: true
-    },
-    {
-      title: $t('common.action'),
-      key: 'actions',
-      width: 200,
-      render(rowData, _rowIndex) {
-        return h('div', null, {
-          default: () => [
-            h(
-              NButton,
-              {
-                type: 'primary',
-                style: 'margin-right: 8px',
-                round: true,
-                onClick: async () => await handleEdit(rowData)
-              },
-              {
-                default: () => $t('common.edit')
-              }
-            ),
-            h(
-              NPopconfirm,
-              {
-                onPositiveClick: async () => await handleDelete(rowData.id)
-              },
-              {
-                trigger: () =>
-                  h(
-                    NButton,
-                    {
-                      type: 'error',
-                      round: true,
-                      strong: true
-                    },
-                    {
-                      default: () => $t('common.delete')
-                    }
-                  ),
-                default: () => $t('common.confirmDelete')
-              }
-            )
-          ]
-        });
-      }
     }
   ];
+  if (showEditDelete) {
+    columns.push(
+      createEditDeleteActionsColumn(
+        async rowData => await handleEdit(rowData),
+        async rowData => await handleDelete(rowData.id)
+      )
+    );
+  }
+  return columns;
 };
