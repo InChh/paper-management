@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 import { $t } from '@/locales';
 import { useAppStore } from '@/store/modules/app';
 import { useAuthStore } from '@/store/modules/auth';
-import { weatherForecast } from '@/service/api/weather';
 
 defineOptions({
   name: 'HeaderBanner'
@@ -13,28 +12,6 @@ const appStore = useAppStore();
 const authStore = useAuthStore();
 
 const gap = computed(() => (appStore.isMobile ? 0 : 16));
-
-const weather = ref('');
-
-onMounted(() => getWeather());
-function getWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      async position => {
-        const { latitude, longitude } = position.coords;
-        const response = await weatherForecast({
-          location: `${longitude},${latitude}`,
-          key: import.meta.env.VITE_WEATHER_API_KEY
-        });
-        if (response.data) {
-          const { now } = response.data;
-          weather.value = `${now.text} ${now.temp}°C ${now.windDir}`;
-        }
-      },
-      () => {}
-    );
-  }
-}
 </script>
 
 <template>
@@ -53,7 +30,6 @@ function getWeather() {
                 })
               }}
             </h3>
-            <p class="text-#999 leading-30px">{{ weather }}</p>
           </div>
         </div>
       </NGi>
