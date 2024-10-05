@@ -53,7 +53,7 @@ function logout() {
     positiveText: $t('common.confirm'),
     negativeText: $t('common.cancel'),
     onPositiveClick: async () => {
-      await keycloak.logout({ redirectUri: window.location.origin });
+      await keycloak.value!.logout({ redirectUri: window.location.origin });
       await authStore.resetStore();
     }
   });
