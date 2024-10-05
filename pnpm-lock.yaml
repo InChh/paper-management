@@ -14,8 +14,8 @@ importers:
         specifier: 4.1.1
         version: 4.1.1(vue@3.4.21)
       '@josempgon/vue-keycloak':
-        specifier: ^2.6.0
-        version: 2.6.0(keycloak-js@21.1.1)(vue@3.4.21)
+        specifier: ^3.0.1
+        version: 3.0.1(keycloak-js@21.1.1)(vue@3.4.21)
       '@sa/axios':
         specifier: workspace:*
         version: link:packages/axios
@@ -1326,14 +1326,14 @@ packages:
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: true
 
-  /@josempgon/vue-keycloak@2.6.0(keycloak-js@21.1.1)(vue@3.4.21):
+  /@josempgon/vue-keycloak@3.0.1(keycloak-js@21.1.1)(vue@3.4.21):
     resolution:
       {
-        integrity: sha512-rnggA8uPcwxLMfewItMxKKnLnrzGUx6rUwb+b6g9WPCaUMzGOp+bBnB0ouQyyeGCvrbRqZxF1Eb01vw6v6Y0uQ==,
+        integrity: sha512-vwrbUj+fp8allFcYwPxXOZ7WpmVGIth2g7UzstniMheOfU6TFKc28V/3INLCtpCgbHSuC70K937dFEp77bVHhw==,
       }
     peerDependencies:
-      keycloak-js: 18 - 24
-      vue: ^3.2.47
+      keycloak-js: 18 - 25
+      vue: ^3.4.0
     dependencies:
       keycloak-js: 21.1.1
       vue: 3.4.21(typescript@5.3.3)
