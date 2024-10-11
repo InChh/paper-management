@@ -22,6 +22,13 @@ export function getMonthlyResolveCount() {
   });
 }
 
+export function getMonthlyResoveDetail() {
+  return request<Api.Statistic.DailyResolveCount[]>({
+    url: '/app/statistic/monthly-resolve-detail',
+    method: 'get'
+  });
+}
+
 export function getWorkerStatisticInfo(params: Api.Statistic.StatisticParams) {
   return request<Api.Common.PaginatingResponse<Api.Statistic.WorkerStatisticInfo>>({
     url: '/app/statistic/worker-resolve-count',

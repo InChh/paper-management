@@ -145,6 +145,11 @@ declare namespace Api {
       startTime: string;
       endTime: string;
     }
+
+    interface DailyResolveCount {
+      date: string;
+      resolveCount: number;
+    }
   }
 
   /**
