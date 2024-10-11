@@ -135,6 +135,9 @@ function handlePositiveClick() {
   formRef.value?.validate(errors => {
     if (!errors) {
       const record = toRaw(paperRecord.value);
+      if (record.workerId === record.worker2Id) {
+        return;
+      }
       record.problemType = `${systemType.value},${deviceType.value}`;
       if (isEdit.value) {
         emit('onEdit', record);
@@ -164,19 +167,22 @@ function handlePositiveClick() {
         <n-input v-model:value="paperRecord.address" :placeholder="$t('page.paper.address')" />
       </n-form-item>
       <n-form-item
-        :validation-status="deviceType ? 'success' : 'error'"
+        :validation-status="systemType ? 'success' : 'error'"
         :feedback="
-          $t('common.fieldRequiredMessage', {
-            field: $t('page.paper.deviceType')
-          })
+          systemType
+            ? ''
+            : $t('common.fieldRequiredMessage', {
+                field: $t('page.paper.systemType')
+              })
         "
         :label="$t('page.paper.systemType')"
+        :path="systemType"
       >
         <n-radio-group v-model:value="systemType">
           <n-radio value="win11">win11</n-radio>
           <n-radio value="win10">win10</n-radio>
           <n-radio value="win8">win8</n-radio>
-          <n-radio value="xp\win7">xp\win7</n-radio>
+          <n-radio value="xp\win7">xp/win7</n-radio>
           <n-radio value="macos">macos</n-radio>
           <n-radio value="android">android</n-radio>
           <n-radio value="ios">ios</n-radio>
@@ -185,11 +191,14 @@ function handlePositiveClick() {
       <n-form-item
         :validation-status="deviceType ? 'success' : 'error'"
         :feedback="
-          $t('common.fieldRequiredMessage', {
-            field: $t('page.paper.deviceType')
-          })
+          deviceType
+            ? ''
+            : $t('common.fieldRequiredMessage', {
+                field: $t('page.paper.deviceType')
+              })
         "
         :label="$t('page.paper.deviceType')"
+        :path="deviceType"
       >
         <n-radio-group v-model:value="deviceType">
           <n-radio :value="$t('page.paper.deviceTypeEnum.pc')">{{ $t('page.paper.deviceTypeEnum.pc') }}</n-radio>
@@ -230,7 +239,18 @@ function handlePositiveClick() {
           clearable
         />
       </n-form-item>
-      <n-form-item path="workerId" :label="$t('page.paper.worker')">
+      <n-form-item
+        path="workerId"
+        :label="$t('page.paper.worker')"
+        :validation-status="
+          paperRecord.workerId && paperRecord.workerId === paperRecord.worker2Id ? 'error' : 'success'
+        "
+        :feedback="
+          paperRecord.workerId && paperRecord.workerId === paperRecord.worker2Id
+            ? $t('page.paper.twoWorkerCanNotBeTheSame')
+            : ''
+        "
+      >
         <n-select
           v-model:value="paperRecord.workerId"
           :placeholder="$t('page.paper.worker')"
@@ -240,7 +260,18 @@ function handlePositiveClick() {
           clearable
         ></n-select>
       </n-form-item>
-      <n-form-item path="worker2Id" :label="$t('page.paper.worker')">
+      <n-form-item
+        path="worker2Id"
+        :label="$t('page.paper.worker')"
+        :validation-status="
+          paperRecord.worker2Id && paperRecord.workerId === paperRecord.worker2Id ? 'error' : 'success'
+        "
+        :feedback="
+          paperRecord.worker2Id && paperRecord.workerId === paperRecord.worker2Id
+            ? $t('page.paper.twoWorkerCanNotBeTheSame')
+            : ''
+        "
+      >
         <n-select
           v-model:value="paperRecord.worker2Id"
           :placeholder="$t('page.paper.worker')"

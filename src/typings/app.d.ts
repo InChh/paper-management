@@ -429,6 +429,7 @@ declare namespace App {
           receiveTime: string;
           completeTime: string;
           note: string;
+          twoWorkerCanNotBeTheSame: string;
         };
         worker: {
           name: string;

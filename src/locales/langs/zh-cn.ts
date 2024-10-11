@@ -224,7 +224,8 @@ const local: App.I18n.Schema = {
       receiverId: '接单队员工号',
       receiveTime: '拿单时间',
       completeTime: '还单时间',
-      note: '备注'
+      note: '备注',
+      twoWorkerCanNotBeTheSame: '两个出单队员不能相同'
     },
     worker: {
       name: '队员姓名',

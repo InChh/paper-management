@@ -224,7 +224,8 @@ const local: App.I18n.Schema = {
       receiverId: 'Receiver ID',
       receiveTime: 'Receive Time',
       completeTime: 'Complete Time',
-      note: 'Note'
+      note: 'Note',
+      twoWorkerCanNotBeTheSame: 'Two workers cannot be the same'
     },
     worker: {
       name: 'Worker Name',
