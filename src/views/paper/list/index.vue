@@ -199,7 +199,8 @@ async function handleClearSearch() {
         createColumns({
           handleEdit: showEditModal,
           handleDelete,
-          showEditDelete: userInfo.roles.includes(CommonRole.Worker)
+          showEdit: userInfo.roles.includes(CommonRole.Worker),
+          showDelete: userInfo.roles.includes(CommonRole.Leader)
         })
       "
       :data="data"
