@@ -229,7 +229,10 @@ const local: App.I18n.Schema = {
     worker: {
       name: 'Worker Name',
       userId: 'User ID',
-      workerId: 'Worker ID'
+      workerId: 'Worker ID',
+      isOnDuty: 'Status',
+      onDuty: 'On Duty',
+      offDuty: 'Off Duty'
     },
     statistic: {
       title: 'Statistic',

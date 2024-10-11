@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from 'vue';
 import type { PaginationProps } from 'naive-ui/es/pagination/src/Pagination';
 import type { DataTableSortState } from 'naive-ui';
 import { createColumns } from '@/views/worker/list/columns';
-import { createWorker, deleteWorkerByUserId, getWorkerList, updateWorker } from '@/service/api';
+import { createWorker, deleteWorkerByUserId, getWorkerList, offDuty, onDuty, updateWorker } from '@/service/api';
 import type { Api } from '@/typings/api';
 import { $t } from '@/locales';
 import { defaultWorker } from '@/constants/worker';
@@ -117,6 +117,16 @@ async function handleDelete(id: string) {
 async function handleRefresh() {
   await fetchData(pagination.page, pagination.pageSize, sortingRef.value);
 }
+
+async function handleOnDuty(id: string) {
+  await onDuty(id);
+  await fetchData(pagination.page, pagination.pageSize, sortingRef.value);
+}
+
+async function handleOffDuty(id: string) {
+  await offDuty(id);
+  await fetchData(pagination.page, pagination.pageSize, sortingRef.value);
+}
 </script>
 
 <template>
@@ -145,7 +155,9 @@ async function handleRefresh() {
         createColumns({
           handleEdit: showEditModal,
           handleDelete,
-          showEditDelete: userInfo.roles.includes(CommonRole.Leader) || userInfo.roles.includes(CommonRole.Admin)
+          showEditDelete: userInfo.roles.includes(CommonRole.Leader) || userInfo.roles.includes(CommonRole.Admin),
+          handleOnDuty,
+          handleOffDuty
         })
       "
       :data="data"

@@ -31,6 +31,9 @@ importers:
       '@sa/utils':
         specifier: workspace:*
         version: link:packages/utils
+      '@vicons/ionicons5':
+        specifier: ^0.12.0
+        version: 0.12.0
       '@vueuse/core':
         specifier: 11.1.0
         version: 11.1.0(vue@3.5.11)
@@ -2737,6 +2740,13 @@ packages:
       - rollup
       - supports-color
     dev: true
+
+  /@vicons/ionicons5@0.12.0:
+    resolution:
+      {
+        integrity: sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==,
+      }
+    dev: false
 
   /@vitejs/plugin-vue-jsx@4.0.1(vite@5.4.8)(vue@3.5.11):
     resolution:

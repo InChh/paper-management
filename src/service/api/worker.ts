@@ -53,3 +53,17 @@ export function deleteWorkerByWorkerId(workerId: number) {
     method: 'DELETE'
   });
 }
+
+export function onDuty(userId: string) {
+  return request({
+    url: `/app/worker/on-duty/${userId}`,
+    method: 'POST'
+  });
+}
+
+export function offDuty(userId: string) {
+  return request({
+    url: `/app/worker/off-duty/${userId}`,
+    method: 'POST'
+  });
+}

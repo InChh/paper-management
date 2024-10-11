@@ -229,7 +229,10 @@ const local: App.I18n.Schema = {
     worker: {
       name: '队员姓名',
       userId: '用户id',
-      workerId: '队员工号'
+      workerId: '队员工号',
+      isOnDuty: '状态',
+      onDuty: '在队',
+      offDuty: '离队'
     },
     statistic: {
       title: '出单统计',

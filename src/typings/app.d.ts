@@ -434,6 +434,9 @@ declare namespace App {
           name: string;
           userId: string;
           workerId: string;
+          isOnDuty: string;
+          onDuty: string;
+          offDuty: string;
         };
         statistic: {
           title: string;

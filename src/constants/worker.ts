@@ -11,5 +11,6 @@ export const defaultWorker: Api.Worker.WorkerRecord = {
   lastModifierId: null,
   name: null,
   userId: null,
-  workerId: null
+  workerId: null,
+  isOnDuty: null
 };

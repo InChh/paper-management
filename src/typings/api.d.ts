@@ -74,6 +74,7 @@ declare namespace Api {
       name: string | null;
       workerId: number | null;
       userId: string | null;
+      isOnDuty: boolean | null;
     }
 
     interface CreateWorkerParams {
