@@ -3,13 +3,17 @@ import VChart from 'vue-echarts';
 import { onMounted, ref } from 'vue';
 import { use } from 'echarts/core';
 import { BarChart, LineChart } from 'echarts/charts';
-import { GridComponent, TooltipComponent } from 'echarts/components';
+import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { getMonthlyResoveDetail } from '@/service/api/statistic';
 
-use([TooltipComponent, GridComponent, LineChart, BarChart, CanvasRenderer]);
+use([TooltipComponent, TitleComponent, GridComponent, LineChart, BarChart, CanvasRenderer]);
 
 const option = ref({
+  title: {
+    text: '网服月出单统计',
+    left: 'center'
+  },
   tooltip: {
     trigger: 'axis'
   },
