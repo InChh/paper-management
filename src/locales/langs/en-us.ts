@@ -193,7 +193,8 @@ const local: App.I18n.Schema = {
     home: {
       greeting: 'Good morning, {userName}, today is another day full of vitality!',
       todayResolveCount: 'Today Resolved',
-      totalResolveCount: 'Total Resolved'
+      totalResolveCount: 'Total Resolved',
+      monthlyResolveCount: 'Month Resolved'
     },
     paper: {
       name: 'Client Name',

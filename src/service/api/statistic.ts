@@ -8,6 +8,20 @@ export function getTodayResolveCount() {
   });
 }
 
+export function getTotalResolveCount() {
+  return request<number>({
+    url: '/app/statistic/total-resolve-count',
+    method: 'get'
+  });
+}
+
+export function getMonthlyResolveCount() {
+  return request<number>({
+    url: '/app/statistic/monthly-resolve-count',
+    method: 'get'
+  });
+}
+
 export function getWorkerStatisticInfo(params: Api.Statistic.StatisticParams) {
   return request<Api.Common.PaginatingResponse<Api.Statistic.WorkerStatisticInfo>>({
     url: '/app/statistic/worker-resolve-count',

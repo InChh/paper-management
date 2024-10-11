@@ -398,6 +398,7 @@ declare namespace App {
           greeting: string;
           todayResolveCount: string;
           totalResolveCount: string;
+          monthlyResolveCount: string;
         };
         paper: {
           name: string;

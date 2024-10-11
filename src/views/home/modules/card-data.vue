@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { createReusableTemplate } from '@vueuse/core';
 import { $t } from '@/locales';
-import { getTodayResolveCount } from '@/service/api/statistic';
+import { getMonthlyResolveCount, getTodayResolveCount, getTotalResolveCount } from '@/service/api/statistic';
 
 defineOptions({
   name: 'CardData'
@@ -21,11 +21,21 @@ interface CardData {
 }
 
 const todayResolveCount = ref(0);
+const totalResolveCount = ref(0);
+const monthlyResolveCount = ref(0);
 
 onMounted(async () => {
-  const res = await getTodayResolveCount();
-  if (res.data) {
-    todayResolveCount.value = res.data;
+  const todayResolveCountResp = await getTodayResolveCount();
+  const totalResolveCountResp = await getTotalResolveCount();
+  const monthlyResolveCountResp = await getMonthlyResolveCount();
+  if (todayResolveCountResp.data) {
+    todayResolveCount.value = todayResolveCountResp.data;
+  }
+  if (totalResolveCountResp.data) {
+    totalResolveCount.value = totalResolveCountResp.data;
+  }
+  if (monthlyResolveCountResp.data) {
+    monthlyResolveCount.value = monthlyResolveCountResp.data;
   }
 });
 
@@ -39,18 +49,29 @@ const cardData = computed(() => [
       start: '#ec4786',
       end: '#b955a4'
     },
-    icon: 'ant-design:bar-chart-outlined'
+    icon: 'ic:outline-calendar-today'
   },
   {
-    key: 'totalCount',
+    key: 'monthlyResolveCount',
+    title: $t('page.home.monthlyResolveCount'),
+    value: monthlyResolveCount.value,
+    unit: '',
+    color: {
+      start: '#9a6de2',
+      end: '#3d3291'
+    },
+    icon: 'ic:outline-calendar-month'
+  },
+  {
+    key: 'totalResolveCount',
     title: $t('page.home.totalResolveCount'),
-    value: 0,
+    value: todayResolveCount.value,
     unit: '',
     color: {
       start: '#865ec0',
       end: '#5144b4'
     },
-    icon: 'ant-design:money-collect-outlined'
+    icon: 'iconoir:sigma-function'
   }
 ]);
 

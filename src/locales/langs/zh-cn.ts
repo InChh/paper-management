@@ -193,7 +193,8 @@ const local: App.I18n.Schema = {
     home: {
       greeting: '欢迎，{username}, 今天又是充满活力的一天!',
       todayResolveCount: '今日出单量',
-      totalResolveCount: '总出单量'
+      totalResolveCount: '总出单量',
+      monthlyResolveCount: '本月出单量'
     },
     paper: {
       name: '客户名称',
