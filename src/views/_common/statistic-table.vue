@@ -54,9 +54,10 @@ const selectOptions = reactive<SelectOption[]>([
   { label: $t('page.worker.name'), value: 'WorkerName' }
 ]);
 
-const date = new Date();
+const now = new Date();
+const date = new Date(now.getFullYear(), now.getMonth(), 1);
 const startTimeRef = ref<string>(formatISO(date, { representation: 'date' }));
-date.setMonth(date.getMonth() + 1);
+date.setDate(now.getDate());
 const endTimeRef = ref<string>(formatISO(date, { representation: 'date' }));
 
 const timeRangeRef = ref<[string, string]>([startTimeRef.value, endTimeRef.value]);
