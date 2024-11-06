@@ -65,7 +65,7 @@ const cardData = computed(() => [
   {
     key: 'totalResolveCount',
     title: $t('page.home.totalResolveCount'),
-    value: todayResolveCount.value,
+    value: totalResolveCount.value,
     unit: '',
     color: {
       start: '#865ec0',
