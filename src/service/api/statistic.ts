@@ -22,9 +22,13 @@ export function getMonthlyResolveCount() {
   });
 }
 
-export function getMonthlyResoveDetail() {
+export function getMonthlyResoveDetail(
+  year: number = new Date().getFullYear(),
+  month: number = new Date().getMonth() + 1
+) {
   return request<Api.Statistic.DailyResolveCount[]>({
     url: '/app/statistic/monthly-resolve-detail',
+    params: { year, month },
     method: 'get'
   });
 }

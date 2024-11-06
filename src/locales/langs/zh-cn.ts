@@ -194,7 +194,8 @@ const local: App.I18n.Schema = {
       greeting: '欢迎，{username}, 今天又是充满活力的一天!',
       todayResolveCount: '今日出单量',
       totalResolveCount: '总出单量',
-      monthlyResolveCount: '本月出单量'
+      monthlyResolveCount: '本月出单量',
+      chartTitle: '网服月出单统计'
     },
     paper: {
       name: '客户名称',

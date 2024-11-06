@@ -6,14 +6,11 @@ import { BarChart, LineChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { getMonthlyResoveDetail } from '@/service/api/statistic';
+import { $t } from '../../locales';
 
 use([TooltipComponent, TitleComponent, GridComponent, LineChart, BarChart, CanvasRenderer]);
 
 const option = ref({
-  title: {
-    text: '网服月出单统计',
-    left: 'center'
-  },
   tooltip: {
     trigger: 'axis'
   },
@@ -42,9 +39,11 @@ const option = ref({
     }
   ]
 });
+const now = new Date();
+const timestamp = ref(new Date(now.getFullYear(), now.getMonth(), 1).getTime());
 
-async function updateChart() {
-  const res = await getMonthlyResoveDetail();
+async function updateChart(year: number, month: number) {
+  const res = await getMonthlyResoveDetail(year, month);
   if (res.data) {
     const data = res.data;
     option.value.xAxis.data = data.map(item => new Date(item.date).toLocaleDateString());
@@ -53,13 +52,29 @@ async function updateChart() {
   }
 }
 
+async function handleDateUpdate(newValue: number) {
+  const date = new Date(newValue);
+  await updateChart(date.getFullYear(), date.getMonth() + 1);
+}
+
 onMounted(async () => {
-  await updateChart();
+  await updateChart(now.getFullYear(), now.getMonth() + 1);
 });
 </script>
 
 <template>
-  <VChart class="chart" :option="option" autoresize />
+  <n-flex vertical align="center" justify="around">
+    <n-h2>{{ $t('page.home.chartTitle') }}</n-h2>
+    <n-date-picker
+      v-model:value="timestamp"
+      type="month"
+      format="y年M月"
+      year-format="y年"
+      month-format="M月"
+      :on-update-value="handleDateUpdate"
+    />
+    <VChart class="chart" :option="option" autoresize />
+  </n-flex>
 </template>
 
 <style scoped>

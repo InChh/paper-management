@@ -10,8 +10,10 @@ import StatisticChart from '@/views/_common/statistic-chart.vue';
     <HeaderBanner />
     <CardData />
     <NCard :title="$t('page.statistic.title')">
-      <StatisticTable />
-      <StatisticChart />
+      <n-flex vertical>
+        <StatisticTable />
+        <StatisticChart />
+      </n-flex>
     </NCard>
   </NSpace>
 </template>

@@ -194,7 +194,8 @@ const local: App.I18n.Schema = {
       greeting: 'Good morning, {userName}, today is another day full of vitality!',
       todayResolveCount: 'Today Resolved',
       totalResolveCount: 'Total Resolved',
-      monthlyResolveCount: 'Month Resolved'
+      monthlyResolveCount: 'Month Resolved',
+      chartTitle: 'Monthly Resolved Statistic'
     },
     paper: {
       name: 'Client Name',
