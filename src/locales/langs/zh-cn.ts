@@ -130,7 +130,8 @@ const local: App.I18n.Schema = {
     paper: '服务单',
     paper_list: '查询服务单',
     worker: '网服队员',
-    worker_list: '查询队员'
+    worker_list: '查询队员',
+    worker_salary: '查询工资'
   },
   page: {
     login: {
@@ -239,7 +240,9 @@ const local: App.I18n.Schema = {
     },
     statistic: {
       title: '出单统计',
-      resolveCount: '出单量'
+      resolveCount: '出单量',
+      dutyCount: '值班次数',
+      salary: '工资'
     }
   },
   form: {

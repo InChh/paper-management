@@ -27,4 +27,5 @@ export const views: Record<
   home: () => import('@/views/home/index.vue'),
   paper_list: () => import('@/views/paper/list/index.vue'),
   worker_list: () => import('@/views/worker/list/index.vue'),
+  worker_salary: () => import('@/views/worker/salary/index.vue'),
 };

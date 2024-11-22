@@ -130,7 +130,8 @@ const local: App.I18n.Schema = {
     paper: 'Paper',
     paper_list: 'Paper List',
     worker: 'Worker',
-    worker_list: 'Worker List'
+    worker_list: 'Worker List',
+    worker_salary: 'Worker Salary'
   },
   page: {
     login: {
@@ -239,7 +240,9 @@ const local: App.I18n.Schema = {
     },
     statistic: {
       title: 'Statistic',
-      resolveCount: 'Resolve Count'
+      resolveCount: 'Resolve Count',
+      dutyCount: 'Duty Count',
+      salary: 'Salary'
     }
   },
   form: {

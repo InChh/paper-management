@@ -176,6 +176,7 @@ const routeMap: RouteMap = {
   paper_list: '/paper/list',
   worker: '/worker',
   worker_list: '/worker/list',
+  worker_salary: '/worker/salary',
 };
 
 /**

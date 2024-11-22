@@ -90,6 +90,15 @@ export const generatedRoutes: GeneratedRoute[] = [
           roles: ['worker'],
         },
       },
+      {
+        name: 'worker_salary',
+        path: '/worker/salary',
+        component: 'view.worker_salary',
+        meta: {
+          title: 'worker_salary',
+          i18nKey: 'route.worker_salary',
+        },
+      },
     ],
   },
 ];

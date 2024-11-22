@@ -25,6 +25,7 @@ declare module "@elegant-router/types" {
     "paper_list": "/paper/list";
     "worker": "/worker";
     "worker_list": "/worker/list";
+    "worker_salary": "/worker/salary";
   };
 
   /**
@@ -84,6 +85,7 @@ declare module "@elegant-router/types" {
     | "home"
     | "paper_list"
     | "worker_list"
+    | "worker_salary"
   >;
 
   /**

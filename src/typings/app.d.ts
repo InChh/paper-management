@@ -399,6 +399,7 @@ declare namespace App {
           todayResolveCount: string;
           totalResolveCount: string;
           monthlyResolveCount: string;
+          chartTitle: string;
         };
         paper: {
           name: string;
@@ -443,6 +444,8 @@ declare namespace App {
         statistic: {
           title: string;
           resolveCount: string;
+          dutyCount: string;
+          salary: string;
         };
       };
       form: {
