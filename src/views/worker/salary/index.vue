@@ -3,10 +3,7 @@ import { h, onMounted, reactive, ref, watch } from 'vue';
 import type { DataTableColumns, DataTableSortState, PaginationProps, SelectOption } from 'naive-ui';
 import { NInput } from 'naive-ui';
 import { formatISO } from 'date-fns';
-import * as XLSX from 'xlsx';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import * as XLSX_STYLE from 'xlsx-style-vite';
+import * as XLSX from 'xlsx-js-style';
 import XLSX_SAVER from 'file-saver';
 import type { Api } from '@/typings/api';
 import { $t } from '@/locales';
@@ -223,7 +220,9 @@ function exportToExcel(exportData: any[], fileName: string) {
             wrapText: true // 自动换行
           },
           font: {
-            bold: true
+            name: '黑体',
+            bold: true,
+            sz: '13'
           },
           fill: {
             fgColor: { rgb: 'FFFFCC00' }
@@ -236,6 +235,10 @@ function exportToExcel(exportData: any[], fileName: string) {
             horizontal: 'center', // 水平居中
             vertical: 'center', // 竖直居中
             wrapText: true // 自动换行
+          },
+          font: {
+            name: '黑体',
+            sz: '13'
           }
         };
       }
@@ -247,7 +250,7 @@ function exportToExcel(exportData: any[], fileName: string) {
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
 
   // 导出 Excel 文件
-  const wbout = XLSX_STYLE.write(workbook, {
+  const wbout = XLSX.write(workbook, {
     bookType: 'xlsx',
     bookSST: false,
     type: 'binary'
