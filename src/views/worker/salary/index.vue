@@ -43,7 +43,7 @@ const columns: DataTableColumns<SalaryInfo> = [
           onUpdateValue: newValue => {
             if (/^\d+$/.test(newValue)) {
               data.value[index].dutyCount = Number(newValue);
-              data.value[index].salary = data.value[index].dutyCount * 16 + data.value[index].resolveCount * 21;
+              data.value[index].salary = data.value[index].dutyCount * 21 + data.value[index].resolveCount * 25;
             }
           }
         },
